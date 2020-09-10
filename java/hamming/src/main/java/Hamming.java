@@ -2,8 +2,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class Hamming {
-    final String leftStrand;
-    final String rightStrand;
+    int hammingDistance;
 
     public Hamming(String leftStrand, String rightStrand) throws IllegalArgumentException {
 
@@ -17,21 +16,18 @@ public class Hamming {
             throw new IllegalArgumentException("leftStrand and rightStrand must be of equal length.");
 
         else {
-            this.leftStrand = leftStrand;
-            this.rightStrand = rightStrand;
+            if (leftStrand.equals(rightStrand))
+                hammingDistance = 0;
+            else {
+                for (int i = 0; i < leftStrand.length(); i++) {
+                    if (leftStrand.charAt(i) != rightStrand.charAt(i))
+                        hammingDistance++;
+                }
+            }
         }
     }
 
     public int getHammingDistance() {
-        int hammingDistance = 0;
-
-        if (leftStrand.equals(rightStrand))
-            return hammingDistance;
-
-        for (int i = 0; i < leftStrand.length(); i++) {
-            if (leftStrand.charAt(i) != rightStrand.charAt(i))
-                hammingDistance++;
-        }
-        return hammingDistance;
+        return this.hammingDistance;
     }
 }
